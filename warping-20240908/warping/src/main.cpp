@@ -149,7 +149,34 @@ int main() {
 // distorsiona un vértice de la geometría
 glm::vec3 warpPoint(const Delaunay &delaunay0, const Delaunay &delaunay1, glm::vec3 p) {
 	/// @todo: completar
-	return p;
+	
+	
+//	//////////////// TRIANGULO VIEJO///////////////////////////////////////////
+	int indice = delaunay0.enQueTriangulo(p);
+	std::vector<Triangulo> triangulos = delaunay0.getTriangulos();
+	std::vector<glm::vec3> puntos = delaunay0.getPuntos();
+	Triangulo t_actual = triangulos[indice];
+	
+	glm::vec3 p0 = puntos[t_actual[0]];
+	glm::vec3 p1 = puntos[t_actual[1]];
+	glm::vec3 p2 = puntos[t_actual[2]];
+	
+	Pesos pesos = calcularPesos(p0,p1,p2,p);
+	
+//	///////////////////////TRIANGULO NUEVO////////////////////////////////////////
+	std::vector<glm::vec3> puntos_new = delaunay1.getPuntos();
+	
+	glm::vec3 p02 = puntos_new[t_actual[0]];
+	glm::vec3 p12 = puntos_new[t_actual[1]];
+	glm::vec3 p22 = puntos_new[t_actual[2]];
+	
+	
+//	///////////////////////PESOS////////////////////////////////////////
+	float pfinal1 = p02.x*pesos[0] + p12.x*pesos[1] + p22.x*pesos[2];
+	float pfinal2 = p02.y*pesos[0] + p12.y*pesos[1] + p22.y*pesos[2];
+	float pfinal3 = p.z;
+	
+	return {pfinal1,pfinal2,pfinal3};
 }
 
 // distorsiona toda la geometría

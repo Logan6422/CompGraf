@@ -229,9 +229,9 @@ Pesos Delaunay::calcularPesos(int i_triangulo, glm::vec3 p) const {
 
 int Delaunay::enQueTriangulo(glm::vec3 &punto) const {
 	/// @todo: analizar y documentar este método
-	int i_tri = rand()%triangulos.size();
-	while (i_tri!=-1) {
-		Pesos ff = calcularPesos(i_tri,punto);
+	int i_tri = rand()%triangulos.size();   
+	while (i_tri!=-1) { //si no tiene vecino devuelve -1
+		Pesos ff = calcularPesos(i_tri,punto); //calcula las coord bar de cada triang
 		int imin;
 		if (ff[0] < ff[2]) {
 			if (ff[0] < ff[1]) imin=0;
@@ -239,11 +239,11 @@ int Delaunay::enQueTriangulo(glm::vec3 &punto) const {
 		} else {
 			if (ff[2] < ff[1]) imin=2;
 			else               imin=1;
-		}
-		if (ff[imin]>=0) break;
-		i_tri = triangulos[i_tri].vecinos[imin];
+		}//chequea la coordenada mas cercana al punto
+		if (ff[imin]>=0) break;// si es positivo es 1 por limitarlo--> si es negativo se encuentra fuera del triangulo actual
+		i_tri = triangulos[i_tri].vecinos[imin];//se mueve al vecino mas cercano al pto
 	}
-	return i_tri;
+	return i_tri;//devuelve el triangulo en el que se encuentra
 }
 
 // devuelve verdadero si el punto esta contenido (estrictamente) en la circunferencia formada por los tres vertices
