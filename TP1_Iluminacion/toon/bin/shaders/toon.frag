@@ -33,16 +33,28 @@ void main() {	// ambient
 	
 	float val = (max(dot(norm,lightDir),0.f));
 	vec3 diffuse;
-	
-	if((val < 1) && (val > 0.66)){
+		
+	if((val < 1) && (val > 0.8)){
 		diffuse = lightColor * objectColor * 1;
-	}else if((val < 0.77) && (val > 0.33)){
+	}else if((val < 0.8) && (val > 0.4)){
 		diffuse = lightColor * objectColor * 0.5;
 	}else{
-		diffuse = lightColor * objectColor * 0;
+		diffuse = lightColor * objectColor * 0.2;
 	}
 	
 	
+	
+//	float val = max(dot(norm, lightDir), 0.0);
+//	vec3 diffuse;
+//	if (val > 0.66) {
+//		diffuse = lightColor * objectColor * smoothstep(0.66, 1.0, val);  // Brillante
+//	} else if (val > 0.33) {
+//		diffuse = lightColor * objectColor * smoothstep(0.33, 0.66, val);  // Intermedio
+//	} else {
+//		diffuse = lightColor * objectColor * smoothstep(0.0, 0.33, val);   // Oscuro
+//	}
+
+
 	
 	// specular
 	vec3 specularColor = specularStrength * vec3(1.f,1.f,1.f);
@@ -51,9 +63,9 @@ void main() {	// ambient
 	vec3 specular /*= lightColor * specularColor * pow(max(dot(norm,halfV),0.f),shininess)*/;
 	float valSpec = pow(max(dot(norm,halfV),0.f),shininess);
 
-	if((valSpec < pow(1,shininess)) && (valSpec > pow(0.6,shininess))){
+	if((valSpec < pow(1,shininess)) && (valSpec > pow(0.7,shininess))){
 		specular = lightColor * specularColor * 1;
-	}else if((valSpec < pow(0.6,shininess)) && (valSpec > pow(0.33,shininess))){
+	}else if((valSpec < pow(0.7,shininess)) && (valSpec > pow(0.4,shininess))){
 		specular = lightColor * specularColor * 0.5;
 	}else{
 		specular = lightColor * specularColor * 0.2;
