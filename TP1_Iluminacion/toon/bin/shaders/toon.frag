@@ -31,7 +31,7 @@ void main() {	// ambient
 	
 	
 	
-	float val = (max(dot(norm,lightDir),0.f));
+	float val = (max(dot(norm,lightDir),0.f));	
 	vec3 diffuse;
 		
 	if((val < 1) && (val > 0.8)){
@@ -61,20 +61,25 @@ void main() {	// ambient
 	vec3 viewDir = normalize(cameraPosition-fragPosition);
 	vec3 halfV = normalize(lightDir + viewDir); // blinn
 	vec3 specular /*= lightColor * specularColor * pow(max(dot(norm,halfV),0.f),shininess)*/;
-	float valSpec = pow(max(dot(norm,halfV),0.f),shininess);
-
-	if((valSpec < pow(1,shininess)) && (valSpec > pow(0.7,shininess))){
-		specular = lightColor * specularColor * 1;
-	}else if((valSpec < pow(0.7,shininess)) && (valSpec > pow(0.4,shininess))){
-		specular = lightColor * specularColor * 0.5;
-	}else{
-		specular = lightColor * specularColor * 0.2;
+	
+	float thresholdHigh = max(0.1, 0.8 - shininess / 320.0);  // Nunca menor a 0.1
+	float thresholdLow = max(0.05, 0.5 - shininess / 640.0);   // Nunca menor a 0.05
+	
+	
+	float valSpec = pow(max(dot(norm, halfV), 0.f), shininess);
+	
+	if(valSpec > thresholdHigh){
+		specular = lightColor * specularColor * 1.0;
+	} else if(valSpec > thresholdLow){
+		specular = lightColor * specularColor *  0.5;
+	} else {
+		specular = lightColor * specularColor *  0.2;
 	}
 	
-	
+//	ambient+diffuse+specular
 	
 	// result
-	fragColor = vec4(ambient+diffuse+specular,1.f);
+	fragColor = vec4(/*ambient+diffuse+*/specular,1.f);
 }
 
 
