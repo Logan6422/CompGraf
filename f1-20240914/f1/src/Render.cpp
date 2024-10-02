@@ -73,6 +73,15 @@ void renderCar(const Car &car, const std::vector<Part> &parts, Shader &shader) {
 		renderPart(car,body.models, mbody,shader);
 	}
 	
+	
+	if (body.show or play) {
+		glm::mat4 mbody(  1.0f, 0.0f, 0.0f, 0.0f, // nuevo eje x
+						  0.0f, 1.0f, 0.0f, 0.0f, // nuevo eje y	
+						  0.0f, 0.0f, 1.0f, 0.0f, // nuevo eje z
+						  0.0f, 0.1f, 0.0f, 1.0f );
+		renderPart(car,body.models, mbody,shader);
+	}
+	
 	if (wheel.show or play) {
 		glm::mat4 mwheel1(0.1f, 0.0f, 0.0f, 0.0f, // nuevo eje x
 						 0.0f, 0.1f, 0.0f, 0.0f, // nuevo eje y
@@ -135,6 +144,10 @@ void renderCar(const Car &car, const std::vector<Part> &parts, Shader &shader) {
 		float angle = 90;
 		glm::radians(angle);
 		
+//		glm::mat4 mhelmet(0.0f, 0.0f, 0.1f, 0.0f,// nuevo eje x (rotado y escalado)
+//						  -0.1f, 0.0f, 0.0f, 0.0f,// nuevo eje y (escalado)
+//						  0.0f, -0.1f, 0.0f, 0.0f, // nuevo eje z (rotado y escalado)
+//						  0.0f, 0.2f, 0.0f, 1.0f); // traslación en Y
 		
 		glm::mat4 mhelmet(0.0f, 0.0f, 0.1f, 0.0f,// nuevo eje x (rotado y escalado)
 						  0.0f, 0.1f, 0.0f, 0.0f,  // nuevo eje y (escalado)
