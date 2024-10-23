@@ -61,21 +61,39 @@ void keyboardCallback(GLFWwindow* glfw_win, int key, int scancode, int action, i
 void characterCallback(GLFWwindow* glfw_win, unsigned int code);
 
 glm::mat4 getTransform(const Spline &spline, double t) {
-	/// @todo: obtener los ejes y la nueva posicion del origen en funcion
-	///        de la curva y el valor del parametro t
-	glm::vec3 e_x(1.f,0.f,0.f);
-	glm::vec3 e_y(0.f,1.f,0.f);
-	glm::vec3 e_z(0.f,0.f,1.f);
-	glm::vec3 pos(0.f,0.f,0.f);
+	// Obtener la posición y la derivada en el parámetro t
+	glm::vec3 pos = spline.at(t);
+	glm::vec3 deriv;
+	spline.at(t, deriv);  // Esto devuelve la derivada en el punto t
 	
-	// armar la matriz
+	// Normalizar la derivada para obtener el eje X (hacia adelante)
+	glm::vec3 e_x = glm::normalize(deriv);
+	
+	// vector y aux
+	glm::vec3 up(0.f, 1.f, 0.f);
+	
+	// Calcular el eje Z (hacia arriba) usando el producto cruzado entre e_x y up
+	glm::vec3 e_z = glm::normalize(glm::cross(e_x, up));
+	
+	// Calcular el eje Y (hacia el lado) usando el producto cruzado entre e_z y e_x
+	glm::vec3 e_y = glm::normalize(glm::cross(e_z, e_x));
+	
+	// Escalar el pez
+	float scale_factor = 0.5f; 
+	e_x *= scale_factor;
+	e_y *= scale_factor;
+	e_z *= scale_factor;
+	
+	// Crear la matriz de transformación
 	glm::mat4 m(1.f);
-	m[0] = glm::vec4(e_x,0.f);
-	m[1] = glm::vec4(e_y,0.f);
-	m[2] = glm::vec4(e_z,0.f);
-	m[3] = glm::vec4(pos,1.f);
+	m[0] = glm::vec4(e_x, 0.f);  // Eje X local
+	m[1] = glm::vec4(e_y, 0.f);  // Eje Y local
+	m[2] = glm::vec4(e_z, 0.f);  // Eje Z local
+	m[3] = glm::vec4(pos, 1.f);  // Posición (origen local)
+	
 	return m;
 }
+
 
 // cuando cambia la cant de tramos, regenerar la spline
 void remapSpline(Spline &spline, int cant_pts) {
