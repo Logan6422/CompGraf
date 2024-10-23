@@ -50,10 +50,10 @@ std::vector<glm::vec2> Flare::generateTextureCoordinatesForFlare(float size, con
 	float t1 = (win_height-(center.y - halfsize))/size;
 	
 	// Asignar las coordenadas de textura
-	texture_coords[0] = glm::vec2(s0, t0); // Inferior Izquierdo
-	texture_coords[1] = glm::vec2(s1, t0); // Inferior Derecho
-	texture_coords[2] = glm::vec2(s1, t1); // Superior Derecho
-	texture_coords[3] = glm::vec2(s0, t1); // Superior Izquierdo
+	texture_coords[0] = glm::vec2(s0, t0); 
+	texture_coords[1] = glm::vec2(s1, t0); 
+	texture_coords[2] = glm::vec2(s1, t1); 
+	texture_coords[3] = glm::vec2(s0, t1); 
 	
 	return texture_coords;
 }

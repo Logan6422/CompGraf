@@ -61,14 +61,14 @@ int main() {
 		double dt = ftime.newFrame();
 		if (rotate) model_angle += static_cast<float>(0.5f*dt);
 		glEnable(GL_CULL_FACE);
-		glFrontFace(GL_CCW);
+		glFrontFace(GL_CCW); //define que lado es el frente de la primitiva
 		
 		// lines
 		if (enable_toon) {
 			shader_lines.use();
 			setMatrixes(shader_lines);
 			shader_lines.setUniform("outline_factor", outline_factor);
-			glCullFace(GL_FRONT);
+			glCullFace(GL_FRONT); //se corta la parte de adelante si se activa el toon
 			for(auto &model : models) {
 				if (glm::dot(model.material.kd, model.material.kd)<0.1f)
 					continue; // no "engrosar" los pelos de homero

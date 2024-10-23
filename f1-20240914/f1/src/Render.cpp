@@ -51,7 +51,7 @@ void setViewAndProjectionMatrixes(const Car &car) {
 		} else {
 			/// @todo: definir view_matrix de modo que la camara persiga al auto desde "atras"
 			glm::vec3 pos_auto = {car.x, 0.f, car.y};
-			view_matrix = glm::lookAt(pos_auto+glm::vec3{-4*cos(car.ang),1.f,-4*sin(car.ang)}, pos_auto, glm::vec3{0.f,1.f		,0.f});
+			view_matrix = glm::lookAt(pos_auto+glm::vec3{-4*cos(car.ang),1.f,-4*sin(car.ang)}, pos_auto, glm::vec3{0.f,1.f,0.f});
 		}
 	} else {
 		view_matrix = glm::lookAt( glm::vec3{0.f,0.f,3.f}, view_target, glm::vec3{0.f,1.f,0.f} );

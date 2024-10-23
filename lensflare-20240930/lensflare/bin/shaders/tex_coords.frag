@@ -4,14 +4,10 @@ in vec2 fragTexCoords;
 out vec4 fragColor;
 
 void main() {
-	/// @@TODO: Use tex coords as color
+	float repeatX = mod(fragTexCoords.x, 1.0); // Limita X entre 0 y 1
+	float repeatY = mod(fragTexCoords.y, 1.0); // Limita Y entre 0 y 1
 	
-	// Escalar los valores de fragTexCoords
-	float red = clamp(fragTexCoords.x * 255.0, 0.0, 255.0); // Color Rojo
-	float blue = clamp(fragTexCoords.y * 255.0, 0.0, 255.0); // Color Azul
-
 	
-	// Asignar el color final
-	fragColor = vec4(red / 255.0, 0.0, blue / 255.0, 1.0);
-	
+	// Asignamos las coordenadas de textura como color
+	fragColor = vec4(repeatX, 0.0, repeatY, 1.0);
 }
