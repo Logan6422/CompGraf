@@ -15,7 +15,7 @@ tab_width=4
 tab_use_spaces=0
 explorer_path=.
 inherits_from=
-current_source=../bin/shaders/tex_coords.frag
+current_source=DrawScene.cpp
 path_char=/
 [source]
 path=main.cpp
@@ -23,7 +23,7 @@ cursor=65:11
 open=true
 [source]
 path=DrawScene.cpp
-cursor=22:1
+cursor=20:0
 open=true
 [source]
 path=Flare.cpp

@@ -84,19 +84,12 @@ int main() {
 		glm::mat4 shadow = getShadowMatrix();
 		glm::mat4 reflection = getReflectionMatrix();
 		
-		// prepare stencil
-		/// @todo: generar valores diferentes en fondo, piso iluminado, sombra
 		
-//		glDepthMask(GL_TRUE);
-		// draw objects
-		/// @todo: seleccionar la mascara y el valor de referencia adecuado para cada objecto
-		drawObject(reflection);
-		drawObject(shadow);
-		drawFloor(true);
-		drawFloor(false);
-		drawObject(identity);
-		drawLight();
 		
+		// Deshabilitar el stencil test para los siguientes dibujados
+		glDisable(GL_STENCIL_TEST);
+		drawObject(identity);  // Dibuja el objeto original
+		//drawLight();
 		draw_buffers.draw(win_width,win_height);
 		
 		// settings sub-window

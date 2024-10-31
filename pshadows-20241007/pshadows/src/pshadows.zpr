@@ -19,9 +19,9 @@ current_source=main.cpp
 path_char=/
 [source]
 path=main.cpp
-cursor=125:0
-marker=114
-marker=117
+cursor=85:2
+marker=107
+marker=110
 open=true
 [source]
 path=../common/utils/ObjMesh.cpp
