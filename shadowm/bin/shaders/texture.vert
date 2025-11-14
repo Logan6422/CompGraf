@@ -16,17 +16,20 @@ out vec3 fragPosition;
 out vec3 fragNormal;
 out vec2 fragTexCoords;
 out vec4 lightVSPosition;
-out vec4 fragPosLightSpace;
+out vec4 fragPosLightSpace; //transforma el world space vertice positino al light space para usarlo en el fragment shader
 
+//renderiza sombras 
+
+//transformacion al light-space
 void main() {
 	mat4 vm = viewMatrix * modelMatrix;
 	vec4 vmp = vm * vec4(vertexPosition,1.f);
 	gl_Position = projectionMatrix * vmp;
 	fragPosition = vec3(vmp)/vmp.w;
 	fragNormal = mat3(transpose(inverse(vm))) * vertexNormal;
-	lightVSPosition = viewMatrix * lightPosition;
-	fragTexCoords = vertexTexCoords;
-	mat4 lightSpaceMatrix = lightProjectionMatrix * lightViewMatrix;
-	fragPosLightSpace = lightSpaceMatrix * modelMatrix * vec4(vertexPosition,1.f);
 	
+	lightVSPosition = viewMatrix * lightPosition;
+	fragTexCoords = vertexTexCoords; // cordenada de textura del vertice, mapea 1:1 frag a texture
+	mat4 lightSpaceMatrix = lightProjectionMatrix * lightViewMatrix;
+	fragPosLightSpace = lightSpaceMatrix * modelMatrix * vec4(vertexPosition,1.f);	
 }

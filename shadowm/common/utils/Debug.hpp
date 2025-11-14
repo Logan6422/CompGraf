@@ -13,13 +13,14 @@
 #define cg_assert__pause_debugger(condition,message) \
    { if (not (condition)) { std::cerr << "ERROR: " << (message) << std::endl; asm("int3"); asm("nop"); } }
 
-#ifdef NDEBUG
+//#ifdef NDEBUG
+#	define cg_assert cg_assert__throw_exception
 #	define cg_info(message) (void(0))
-#else
-#	define cg_info(message) std::cerr << (message) << std::endl;
-#endif
+//#else
+//#	define cg_assert cg_assert__pause_debugger
+//#	define cg_info(message) std::cerr << (message) << std::endl;
+//#endif
 
-#define cg_assert cg_assert__throw_exception
 #define cg_error(message) cg_assert(false,message)
 
 #endif

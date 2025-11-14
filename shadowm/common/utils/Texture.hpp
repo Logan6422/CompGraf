@@ -3,17 +3,14 @@
 
 #include <string>
 #include <glad/glad.h>
-#include "Image.hpp"
 
 class Texture {
 public:
-	enum Flags { fNone=0, fY0OnTop=1, fClampS=2, fClampT=4, fMipmaps=8 };
+	enum Flags { fNone=0, fY0OnTop=1, fClampS=2, fClampT=4 };
 	Texture() = default;
 	Texture(const std::string &fname, int flags=fY0OnTop);
-	Texture(const Image &img, int flags=fY0OnTop);
 	Texture(Texture &&t);
 	Texture &operator=(Texture &&t);
-	void update(const Image &img);
 	~Texture();
 	void bind(int number=0) const;
 	bool isOk() const { return channels!=-1; }

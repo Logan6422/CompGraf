@@ -88,7 +88,7 @@ void GeometryRenderer::updateElements(const std::vector<int> &ve, bool realloc, 
 	updateBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO,ve,realloc,dynamic);
 }
 
-void Geometry::generateNormals() {
+void Geometry::generateNormals ( ) {
 	normals.clear();
 	normals.resize(positions.size());
 	if (triangles.empty()) {
@@ -97,7 +97,7 @@ void Geometry::generateNormals() {
 				glm::normalize(
 					glm::cross(
 						(positions[i+2]-positions[i+1]),
-						(positions[i+1]-positions[i+1]) ) );
+						(positions[i+0]-positions[i+1]) ) );
 	} else {
 		for(size_t i=0;i<triangles.size();i+=3) {
 			auto n = glm::cross( (positions[triangles[i+2]]-positions[triangles[i+1]]),
@@ -109,6 +109,6 @@ void Geometry::generateNormals() {
 		for(auto &n : normals) 
 			if (glm::dot(n,n)!=0) 
 				n = glm::normalize(n);
-	}
+	}	
 }
 

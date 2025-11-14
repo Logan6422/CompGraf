@@ -1,21 +1,12 @@
-#ifndef WINDOW_HPP
+#ifndef WINDOWs_HPP
 #define WINDOW_HPP
 
 #include <vector>
 #include <string>
-#include <functional>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <glm/ext.hpp>
 #include <imgui.h>
-
-struct CameraSettings {
-	glm::vec3 view_target = {0.f,0.f,0.f}, view_pos = {0.f,0.f,3.f};
-	float model_angle = 0.f, view_angle = 0.3f, view_fov = 45.f;
-	bool use_perspective = true;
-};
-
-struct BufferSize { int width=-1, height=-1; };
+#include <functional>
 
 class Window {
 public:
@@ -47,14 +38,10 @@ public:
 	
 	void finishFrame();
 	
-	CameraSettings &getCamera() { return m_camera; }
-	BufferSize getBufferSize() const;
-	
 private:
 	static int windows_count;
 	GLFWwindow *win_ptr = nullptr;
 	ImGuiContext *imgui_context = nullptr;
-	CameraSettings m_camera;
 };
 
 class FrameTimer {
@@ -66,10 +53,6 @@ private:
 	double prev, fps_t;
 	int fps = 0, fps_aux=0;
 };
-
-Window &getWindow(GLFWwindow* window);
-BufferSize getBufferSize(GLFWwindow* window);
-CameraSettings &getCamera(GLFWwindow* window);
 
 namespace ImGui {
 	bool Combo(const char *label, int *current_item, const std::vector<std::string> &items);

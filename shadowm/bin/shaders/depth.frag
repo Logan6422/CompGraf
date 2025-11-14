@@ -7,6 +7,9 @@ uniform float exp;
 
 out vec4 fragColor;
 
+
+//fragment shader para renderizar el depth map en un quad
+//usa el rgb para mostrar los valores del depth buffer en el buffer de color 
 void main() {
 	float d = texture(depthData,fragTexCoords).r;
 	float dp = pow(d,exp);

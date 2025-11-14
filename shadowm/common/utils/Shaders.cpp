@@ -54,7 +54,7 @@ static GLuint loadAndCompile(GLenum shader_type, const std::string &file_path) {
 }
 
 Shader::Shader (const std::string &vertex_fname, const std::string &fragment_fname) {
-	load(vertex_fname,fragment_fname);
+	load(vertex_fname,fragment_fname);//Render simple para transformar los vertices a espacio de luz
 }
 
 Shader::Shader (const std::string &fname) {
@@ -67,7 +67,7 @@ Shader::Shader(Shader &&other) {
 }
 
 Shader &Shader::operator=(Shader &&other) {
-	if (program_id!=0) unload();
+	if (program_id=!0) unload();
 	*this = static_cast<const Shader&>(other);
 	other = static_cast<const Shader&>(Shader());
 	return *this;

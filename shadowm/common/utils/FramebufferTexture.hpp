@@ -22,7 +22,8 @@ public:
 private:
 	Type m_type = None;
 	int m_width = 0, m_height = 0;
-	unsigned int m_fbo = 0, m_tex = 0;
+	unsigned int m_fbo = 0 // id de referencia del frameBuffer
+		, m_tex = 0; // id de la texture
 };
 
 #endif

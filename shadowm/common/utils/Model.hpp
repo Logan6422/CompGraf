@@ -27,7 +27,7 @@ struct Model {
 	// what obj (texture repeat and flipV) and most examples (fit, static data 
 	// and discard geometry) expects
 	enum Flags { fNone=0, fDontFit=1, fKeepGeometry=2, 
-				 fRegenerateNormals=4, fDynamic=8,
+				 fRegenerateNormals=4, fDynamic=8, 
 		         fNoTextures=16, fTextureDontFlipV=32, fTextureClamp=64 };
 	static std::vector<Model> load(const std::string &name, int flags = 0);
 	static Model loadSingle(const std::string &name, int flags = 0);

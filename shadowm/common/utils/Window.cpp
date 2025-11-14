@@ -5,7 +5,6 @@
 #include <backends/imgui_impl_opengl3.h>
 #include "Window.hpp"
 #include "Debug.hpp"
-#include "Callbacks.hpp"
 
 
 namespace ImGui {
@@ -16,12 +15,6 @@ namespace ImGui {
 							}, 
 							(void*)&items, items.size(), -1);
 	}
-}
-
-Window &getWindow(GLFWwindow* window) {
-	Window *win = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
-	cg_assert(win!=nullptr, "GLFWwindow not created by class Window!")
-	return *win;
 }
 
 int Window::windows_count = 0;
@@ -39,7 +32,7 @@ Window::Window (int w, int h, const std::string & title, int flags, GLFWwindow *
 	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,GLFW_TRUE); // mac-os bug?
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,GL_TRUE); // mac-os bug?
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	if (flags&fAntialiasing) glfwWindowHint(GLFW_SAMPLES,4); // antialiasing
 	
@@ -55,7 +48,7 @@ Window::Window (int w, int h, const std::string & title, int flags, GLFWwindow *
 	if (windows_count==0)
 		cg_info(std::string("OpenGL version: ")+reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 	glfwSetInputMode(win_ptr,GLFW_STICKY_KEYS,GL_TRUE);
-	glfwSetFramebufferSizeCallback(win_ptr,common_callbacks::viewResizeCallback);
+	glfwSetFramebufferSizeCallback(win_ptr,[](GLFWwindow *, int w, int h) { glViewport(0,0,w,h); } );
 	
 //	if (flags&fImGui) EnableImgui(); // now is initialized on demand on first frame
 	
@@ -171,16 +164,3 @@ void Window::finishFrame() {
 	glfwPollEvents();
 }
 
-BufferSize Window::getBufferSize() const {
-	BufferSize bs;
-	glfwGetFramebufferSize(win_ptr, &bs.width, &bs.height);
-	return bs;
-}
-
-BufferSize getBufferSize(GLFWwindow* window) {
-	return getWindow(window).getBufferSize();
-}
-
-CameraSettings &getCamera(GLFWwindow* window) {
-	return getWindow(window).getCamera();
-}

@@ -15,7 +15,7 @@
 #include "DrawBuffers.hpp"
 #include "drawScene.hpp"
 
-#define VERSION 20250729
+#define VERSION 20241110
 
 Window window;
 
@@ -38,7 +38,7 @@ void reloadShaders();
 int main() {
 	
 	// initialize window and setup callbacks
-	window = Window(800, 600, "CG Demo");
+	window = Window(win_width,win_height,"CG Demo");
 	setCommonCallbacks(window);
 	glfwSetKeyCallback(window, keyboardCallback);
 	
@@ -61,13 +61,12 @@ int main() {
 	model_light = Model::loadSingle("models/light",Model::fDontFit);
 	int loaded_model = -1;
 	FrameTimer ftime;
-	CameraSettings &cs = window.getCamera();
-	cs.view_target.y = .75f;
-	cs.view_pos.z *= 2;
+	view_target.y = .75f;
+	view_pos.z *= 2;
 	
 	do {
 		
-		cs.view_angle = std::min(std::max(cs.view_angle,-0.1f),1.72f);
+		view_angle = std::min(std::max(view_angle,-0.1f),1.72f);
 		
 		// update ligth position
 		double dt = ftime.newFrame();
@@ -83,44 +82,46 @@ int main() {
 		
 		
 		// generate shadow map
+		//soluciona peter panning
 		shadow_map.bindFramebuffer(true);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		glEnable(GL_CULL_FACE); glCullFace(GL_FRONT);
-		if (calc_shadow_map) drawScene(window, 1); // 1 -> usar el shader "shadow_map"
+		glEnable(GL_CULL_FACE); 
+		glCullFace(GL_FRONT);
+		
+		
+		if (calc_shadow_map) drawScene(1); // 1 -> usar el shader "shadow_map"
 		glDisable(GL_CULL_FACE);
 		
 		window.bindFrameBuffer(true);
 		if (display_shadow_map) {
-			BufferSize bs = window.getBufferSize();
-			draw_buffers.drawDepth(bs.width, bs.height, 2.f, shadow_map.getTexture());
+			draw_buffers.drawDepth(win_width,win_height,2.f,shadow_map.getTexture());
 		} else {
 			// render scene
 			glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 			shadow_map.bindTexture(0);
-			drawScene(window, 2); // 2 -> usar los shaders "phong" y "texture"
+			drawScene(2); // 2 -> usar los shaders "phong" y "texture"
 			
 			// light
 			auto light_matrix = glm::scale( glm::translate( glm::mat4(1.f), glm::vec3(lightPosition) ),
 											glm::vec3(1.f,1.f,1.f)/10.f );
-			drawModel(window, model_light, light_matrix, 2);
+			drawModel(model_light,light_matrix,2);
 		}
 		
 		// settings sub-window
-		window.ImGuiDialog("CG Example", [&](){
-			ImGui::Checkbox("Generate Shadow Map (S)", &calc_shadow_map);
-			ImGui::Checkbox("Display Shadow Map (D)", &display_shadow_map);
-			ImGui::Checkbox("Flat Floor (F)", &flat_floor);
-			ImGui::Checkbox("Rotate Light (L)", &rotate_light);
-			ImGui::SliderAngle("Light Angle", &angle_light,-180,+180);
+		window.ImGuiDialog("CG Example",[&](){
+			ImGui::Checkbox("Generate Shadow Map (S)",&calc_shadow_map);
+			ImGui::Checkbox("Display Shadow Map (D)",&display_shadow_map);
+			ImGui::Checkbox("Flat Floor (F)",&flat_floor);
+			ImGui::Checkbox("Rotate Light (L)",&rotate_light);
+			ImGui::SliderAngle("Light Angle",&angle_light,-180,+180);
 			if (ImGui::Button("Reload Shaders (F5)"))
 				reloadShaders();
 			ImGui::Text(shaders_ok?"   Shaders compilation: Ok":"    Shaders compilation: ERROR");
 		});
 		
-		// finish frame
 		window.finishFrame();
 		
-	} while( glfwGetKey(window, GLFW_KEY_ESCAPE)!=GLFW_PRESS && !glfwWindowShouldClose(window) );
+	} while( glfwGetKey(window,GLFW_KEY_ESCAPE)!=GLFW_PRESS && !glfwWindowShouldClose(window) );
 }
 
 bool reloadShader(Shader &shader, std::string fname) {

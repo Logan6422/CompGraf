@@ -82,7 +82,7 @@ static int getStencilValueUnderMouseCursor(GLFWwindow *window) {
 	double x, y;
 	glfwGetCursorPos(window, &x, &y);
 	unsigned char s;
-	glReadPixels(static_cast<int>(x),getBufferSize(window).height-static_cast<int>(y),1,1,GL_STENCIL_INDEX,GL_UNSIGNED_BYTE,&s);
+	glReadPixels(static_cast<int>(x),win_height-static_cast<int>(y),1,1,GL_STENCIL_INDEX,GL_UNSIGNED_BYTE,&s);
 	return s;
 }
 

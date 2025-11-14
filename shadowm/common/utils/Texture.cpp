@@ -22,25 +22,8 @@ Texture::Texture(const std::string &fname, int flags) {
 	this->repeat_t = !(flags&fClampT);
 }
 
-Texture::Texture(const Image &img, int flags) {
-	glGenTextures(1, &id);
-	glBindTexture(GL_TEXTURE_2D, id); 
-	// set the texture wrapping parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	// set texture filtering parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// load image, create texture and generate mipmaps
-	width = img.GetWidth(); height = img.GetHeight(); channels = img.GetChannels();
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, channels==3?GL_RGB:GL_RGBA, GL_UNSIGNED_BYTE, img.GetData());
-	if (flags&fMipmaps) glGenerateMipmap(GL_TEXTURE_2D);
-	this->repeat_s = !(flags&fClampS); 
-	this->repeat_t = !(flags&fClampT);
-}
-
 Texture::~Texture ( ) {
-	if (id!=0) glDeleteTextures(1,&id);
+	glDeleteTextures(1,&id);
 }
 
 void Texture::bind (int number) const {
@@ -57,14 +40,8 @@ Texture::Texture (Texture &&t) {
 }
 
 Texture & Texture::operator=(Texture &&t) {
-	if (id!=0) glDeleteTextures(1,&id);
 	*this = static_cast<const Texture &>(t);
 	t = static_cast<const Texture &>(Texture{});
 	return *this;
-}
-
-void Texture::update (const Image &img) {
-	cg_assert(img.GetWidth()==width and img.GetHeight()==height, "Texture and Image must have the same size for Texture::Update");
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, img.GetChannels()==3?GL_RGB:GL_RGBA, GL_UNSIGNED_BYTE, img.GetData());
 }
 

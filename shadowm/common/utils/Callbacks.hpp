@@ -4,9 +4,13 @@
 #include <array>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
-class Window;
 
 // window and view
+extern int win_width, win_height;
+extern glm::vec3 view_target, view_pos;
+extern float model_angle, view_angle, view_fov;
+extern bool use_perspective;
+
 namespace common_callbacks {
 	
 void mouseMoveCallback(GLFWwindow* window, double xpos, double ypos);
@@ -21,15 +25,15 @@ struct render_matrixes_t {
 		return projection;
 	}
 };
-render_matrixes_t getMatrixes(Window &window);
+render_matrixes_t getMatrixes();
 
 } // anonymous namespace
 
 void setCommonCallbacks(GLFWwindow* window);
 
 class Shader;
-void setMatrixes(Window &window, Shader &shader);
-void setMatrixes(Window &window, Shader &shader, const glm::mat4 &model_matrix);
+void setMatrixes(Shader &shader);
+void setMatrixes(Shader &shader, const glm::mat4 &model_matrix);
 
 #endif
 
