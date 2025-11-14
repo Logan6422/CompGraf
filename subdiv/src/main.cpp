@@ -174,7 +174,7 @@ void subdivide(SubDivMesh &mesh) {
 	for(size_t i=0;i<size_mesh;i++) { 
 		glm::vec3 sum(0,0,0);
 		
-		Elemento e_actual = mesh.e[i];
+		Elemento& e_actual = mesh.e[i];
 		for(int j=0;j<e_actual.nv;j++) {
 			
 			Nodo nodo_actual = mesh.n[e_actual.n[j]];
@@ -193,52 +193,43 @@ void subdivide(SubDivMesh &mesh) {
 	//      Mas adelante vamos a necesitar determinar cual punto agregamos en cada
 	//      arista, y ya que no se pueden relacionar los indices con una formula simple
 	//      se sugiere usar Mapa como estructura auxiliar
-	Mapa map;	
-
+	Mapa map;
 	
-	size_mesh = mesh.e.size();
-	for(size_t i=0;i<size_mesh;i++) {
-		
-		int size_elemento = mesh.e[i].nv;
-		
-		for(int j=0;j<size_elemento;j++) { 
+	
+	for(size_t i=0;i<mesh.e.size();i++) {
+		for(int j=0;j<mesh.e[i].nv;j++) { 
+			Elemento& actual_e = mesh.e[i];
 			
-			
-			Elemento e_actual = mesh.e[i];
-			int a = e_actual.n[j];
-			int b = e_actual.n[(j + 1) % e_actual.nv];
-			
-			
+			int a = actual_e.n[j];
+			int b = actual_e.n[(j + 1) % mesh.e[i].nv];
 			Arista actual(a,b); //crea arista actual
+			
 			if(map.find(actual) == map.end()){
-				int indice_arista_1 = actual.n[0];
-				int indice_arista_2 = actual.n[1];
+				Nodo n1 = mesh.n[actual.n[0]];
+				Nodo n2 = mesh.n[actual.n[1]];
 				
-				std::vector<int>element_comun =  comunes(mesh.n[indice_arista_1].e,mesh.n[indice_arista_2].e);
-				int size_nodos = mesh.n.size()-1;
+				std::vector<int>element_comun =  comunes(n1.e,n2.e);
 				
 				if (element_comun.size() == 2) {
 					
 					
-					
-					Nodo n1 = mesh.n[indice_arista_1];
-					Nodo n2 = mesh.n[indice_arista_2];
-					
 					Nodo centroide1 = mesh.n[size_orig+element_comun[0]];
 					Nodo centroide2 = mesh.n[size_orig+element_comun[1]];
 					
-					glm::vec3 sum = n1.p+n2.p+centroide1.p+centroide2.p; 
+					glm::vec3 sum = n1.p+n2.p+centroide1.p+centroide2.p;
 					sum /= 4.0f;
 					
 					Nodo nuevo(sum);
 					mesh.n.push_back(nuevo);
-					map[actual] = size_nodos;
+					map[actual] = mesh.n.size()-1;
+					
 				} else {
-					Elemento e_actual = mesh.e[i];
-					glm::vec3 sum = (mesh.n[e_actual.n[j]].p + mesh.n[e_actual.n[(j + 1) % e_actual.nv]].p) / 2.0f;
+					glm::vec3 sum = (mesh.n[actual_e.n[j]].p + mesh.n[actual_e.n[(j + 1) % actual_e.nv]].p) / 2.0f;
+					
+					
 					Nodo nuevo(sum);
 					mesh.n.push_back(nuevo);
-					map[actual] = size_nodos;			
+					map[actual] = mesh.n.size()-1;
 				}
 				
 			}
@@ -246,12 +237,13 @@ void subdivide(SubDivMesh &mesh) {
 		}
 	}
 	
+	
 	//  3) Armar los elementos nuevos
 	//      Los quads se dividen en 4, (uno reemplaza al original, los otros 3 se agregan)
 	//      Los triangulos se dividen en 3, (uno reemplaza al original, los otros 2 se agregan)
 	//      Para encontrar los nodos de las aristas usar el mapa que armaron en el paso 2
 	//      Ordenar los nodos de todos los elementos nuevos con un mismo criterio (por ej, 
-	//      siempre poner primero al centroide del elemento), para simplificar el paso 4.
+////	//      siempre poner primero al centroide del elemento), para simplificar el paso 4.
 	int size_post = mesh.e.size();
 	int size_nodos = mesh.n.size();
 
@@ -285,99 +277,83 @@ void subdivide(SubDivMesh &mesh) {
 		
 	}
 	
-	for(int i=0;i<size_nodos;i++) { 
-		Nodo nodo_actual = mesh.n[i];
-		glm::vec3 r = {0,0,0}; 
-		glm::vec3 res = {0,0,0};
-		glm::vec3 f = {0,0,0};
-		glm::vec3 p = {0,0,0};
-		
-		if(!nodo_actual.es_frontera){
-			
-			float n = mesh.n[i].e.size();
-			
-			for(int j=0;j<n;j++) {
-				int indice_elemento_actual = nodo_actual.e[j];
-				Elemento elemento_actual = (mesh.e[indice_elemento_actual]);
-				Nodo centroide_elemento_actual = mesh.n[elemento_actual.n[0]];
-				Nodo arista1_elemento_actual = mesh.n[elemento_actual.n[1]];
-				
-				
-				f+= centroide_elemento_actual.p;
-				r+= arista1_elemento_actual.p;
-				
-				p = nodo_actual.p;
-			}	
-			f /= n;
-			r /= n;
-			r *= 4.0f;
-			p *= n-3;
-			
-			nodo_actual.p = r - f + p;
-			nodo_actual.p /= n;
-		}
-		else{
-			if(nodo_actual.e.size() == 1){
-				int indice_arista1_elem_actual = (mesh.e[mesh.n[i].e[0]].n[1]);
-				int indice_arista2_elem_actual = (mesh.e[mesh.n[i].e[0]].n[3]);
-				
-				//r = promedio entre los puntos asociados a las aristas originales 
-				glm::vec3 r = {0,0,0}; 
-				r += mesh.n[indice_arista1_elem_actual].p;
-				r += mesh.n[indice_arista2_elem_actual].p;
-				r /= 2.0f;
-				
-				glm::vec3 p = nodo_actual.p; // p = posicion nodo actual
-				
-				glm::vec3 res = {0,0,0};
-				
-				res += r; //r
-				res += p; // (r+p)
-				res /= 2.0f; //(r+p)/2
-				
-				nodo_actual.p = res; //nueva posicion
-			}
-			else{
-				glm::vec3 r = {0,0,0}; 
-				glm::vec3 res = {0,0,0};
-				glm::vec3 p = {0,0,0};
-				
-				int size_elemento_actual = mesh.n[i].e.size();
-				
-				
-				
-				for(int j=0;j<size_elemento_actual;j++) {
-					
-					Nodo nodo_actual = mesh.n[i];
-					
-					int indice_arista1_elemento = (mesh.e[mesh.n[i].e[j]].n[1]);
-					int indice_arista2_elemento = (mesh.e[mesh.n[i].e[j]].n[3]);
-					Nodo cent1 = mesh.n[indice_arista1_elemento];
-					Nodo cent2 = mesh.n[indice_arista2_elemento];
-					
-					if(mesh.n[indice_arista1_elemento].es_frontera){
-						r += cent1.p;
-					}else{
-						r += cent2.p;
-					}
-				}	
-				r /= 2.0f; //promedio
-				
-				p = nodo_actual.p;
-				
-				nodo_actual.p = p+r;
-				nodo_actual.p /= 2;
-			}
-		}
-		
-	}
-
-//	//  4) Calcular las nuevas posiciones de los nodos originales
+	
+	
+	
+	//	//  4) Calcular las nuevas posiciones de los nodos originales
 	//      Para nodos interiores: (4r-f+(n-3)p)/n
 	//         f=promedio de nodos interiores de las caras (los agregados en el paso 1)
 	//         r=promedio de los pts medios de las aristas (los agregados en el paso 2)
 	//         p=posicion del nodo original
 	//         n=cantidad de elementos para ese nodo
+	
+	for(int i=0;i<size_orig;i++) { 
+		Nodo& nodo_actual = mesh.n[i];
+		glm::vec3 r = {0,0,0}; 
+		glm::vec3 f = {0,0,0};
+		glm::vec3 p = nodo_actual.p;
+		
+		if(!nodo_actual.es_frontera){
+			//interior
+			float n = nodo_actual.e.size();
+			
+			for(int j=0;j<n;j++) {
+				int indice_elemento_actual = nodo_actual.e[j];
+				Elemento& elemento_actual = (mesh.e[indice_elemento_actual]);
+				
+				int centroide_elemento_actual = elemento_actual.n[0];
+				int arista1_elemento_actual = elemento_actual.n[1];
+				
+				
+				f+= mesh.n[centroide_elemento_actual].p;
+				r+= mesh.n[arista1_elemento_actual].p;
+				
+			}	
+			f /= n;
+			r /= n;
+			r *= 4;
+			p *= n - 3;
+			
+			nodo_actual.p = r - f + p;
+			nodo_actual.p /= n;
+		}
+		else{
+			//es frontera
+			if(nodo_actual.e.size() == 1){
+				int nod_e = nodo_actual.e[0];
+				Elemento& elem = mesh.e[nod_e];
+				
+				int indice_arista1_elem_actual = (elem.n[1]);
+				int indice_arista2_elem_actual = (elem.n[3]);
+				
+				//r = promedio entre los puntos asociados a las aristas originales 
+				r += mesh.n[indice_arista1_elem_actual].p;
+				r += mesh.n[indice_arista2_elem_actual].p;
+			}
+			else{
+				for(int j=0;j<nodo_actual.e.size();j++) {
+					int nod_e = nodo_actual.e[j];
+					Elemento& elem = mesh.e[nod_e];
+					
+					int indice_arista1_elem_actual = (elem.n[1]);
+					int indice_arista2_elem_actual = (elem.n[3]);
+					
+					if(mesh.n[indice_arista1_elem_actual].es_frontera){
+						r += mesh.n[indice_arista1_elem_actual].p;
+					}else{
+						r += mesh.n[indice_arista2_elem_actual].p;
+					}
+				}	
+			}
+			r /= 2; //promedio
+			
+			nodo_actual.p = p + r;
+			nodo_actual.p /= 2;
+		}
+		
+	}
+
+
 
 	mesh.verificarIntegridad();
 }

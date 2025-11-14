@@ -383,7 +383,7 @@ void subdivide(SubDivMesh& mesh) {
             nod.p /= 2;
         }
     }
-    //
+//    //
     // Esta llamada valida si la estructura de datos quedó consistente (si todos
     // los índices están dentro del rango válido, y si son correctas las
     // relaciones entre los .n de los elementos y los .e de los nodos). Mantener
