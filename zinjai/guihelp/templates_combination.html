@@ -1,0 +1,15 @@
+<HTML><HEAD><TITLE>ZinjaI -  Combinación de Plantillas</TITLE></HEAD><BODY>
+<h3>Combinación de Plantillas</h3>
+
+<p>Esta funcionalidad permite fusionar o reemplazar los <a href="projects.html#config">perfiles</a> de configuración de un proyecto con los otro o de una plantilla. Está pensada para actualizar proyectos creados a partir de plantillas cuando se actualizan las plantillas, y para generar combinaciones que utilicen configuraciones de más de una plantilla a la vez.</p>
+
+<p>Para actualizar un proyecto, o combinarlo con otra plantilla, debe abrir el proyecto en cuestión y acceder a esta opción mediante el botón <em>Combinar/Actualizar Plantilla</em> de la pestaña <a href="project_general_config.html#mas">Más</a> del cuadro de <a href="project_general_config.html">Configuración de Proyecto</a>.</p>
+
+<p>En primer lugar, <em>ZinjaI</em> le mostrará la lista de plantillas de proyecto disponibles para que seleccione una. También dispondrá de una opción adicional al final de la lista que le permitirá abrir un archivo <em>.zpr</em> de otro proyecto, para combinar así los perfiles de dos proyectos existentes  en lugar de un proyecto y una plantilla. Una vez seleccionada la plantilla, o el segundo proyecto, aparecerá el cuadro de diálogo <q>Combinar Plantillas</q>.</p>
+
+<p><center><img src="templates_combination.png" alt=""></center></p>
+
+<p>En este cuadro, a la izquierda se presentan 3 columnas: perfiles del proyecto actual, acción a realizar, y perfiles del segundo proyecto. Allí puede determinar para cada peril del proyecto actual, si desea combinarlo o reemplazarlo con un perfil del otro, o no modificarlo. La acción <q>combinar</q> suma los campos de ambos perfiles. Por ejemplo, en la lista de directorios adicionales para cabeceras, quedarán concatenadas las listas de ambos proyectos. La opción reemplazar reemplaza el valor del perfil del proyecto actual con el del segundo proyecto (esto implica que se perderá el valor actual).</p>
+
+<p>Por último, a la derecha del cuadro de diálogo se listan los campos de los perfiles y de la configuración general que pueden combinarse, junto a casillas de verificación para que puede filtrar (desactivando) los que desee que no se actualicen.</p>
+</BODY></HTML>

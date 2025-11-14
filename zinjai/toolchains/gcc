@@ -1,0 +1,16 @@
+type=gcc
+desc=default gcc
+extern=false
+c_compiler=gcc
+cpp_compiler=g++
+linker=g++
+c_compiling_options=${ARG1}
+cpp_compiling_options=${ARG2}
+c_linker_options=${ARG3}
+cpp_linker_options=${ARG4}
+dynamic_lib_linker=g++ -shared -o
+static_lib_linker=ar cr
+argument1=C compiling arguments=
+argument2=C++ compiling arguments=
+argument3=C linking arguments=
+argument4=C++ linking arguments=

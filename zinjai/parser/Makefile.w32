@@ -1,0 +1,22 @@
+GCC=mingw32-gcc
+OPTS=-O3 -DZASKAR -Dpanic=printf -Dckfree=free -Dckalloc=malloc -Dckrealloc=realloc -DHAVE_CONFIG_H -Ihyper -Icommon -Imisc -Icpp\cpplib -I.
+OBJS_DIR=..\temp\parser\release.w32
+LDFLAGS=-s
+
+all: ..\bin\cbrowser.exe
+
+include Makefile.common
+
+${OBJS_DIR}:
+	mkdir ${OBJS_DIR}
+	
+..\bin:
+	mkdir ..\bin
+	
+..\bin\cbrowser.exe: ..\bin ${OBJS_DIR} ${OBJS}
+	${GCC} ${OBJS} ${LDFLAGS} -o $@
+
+
+clean:
+	del ..\bin\cbrowser.exe
+	del /Q ${OBJS_DIR}\*.o

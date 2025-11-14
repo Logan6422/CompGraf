@@ -1,0 +1,14 @@
+<H3>OpenGL, GLEW and FreeGLUT libraries</H3>
+
+This project is set to use OpenGL and  <A href="http://freeglut.sourceforge.net/">FreeGLUT</A>.
+
+In the <B>Windows</B>' configuration  <A href="http://freeglut.sourceforge.net/">FreeGLUT</A> is used and linked statically (so it won't require any dll file). All files required to compile (headers and binaries) are included in this complement, and installed in a folder "mingXX-gccY/OpenGL" inside ZinjaI's installation directory.<BR>
+<BR>
+To perform a dynamic linkage you must change the name of the library to link from freeglut  to freeglut_static, an delete the macro FREEGLUT_STATIC definition. (use Run->Clean before recompiling). Inside folder "mingXX-gccY/OpenGL/bin" you can find the dlls files required to run a dynamically linked program. ZinjaI will add this path to the PATH environment variable so you won't need to copy those files to run the project from ZinjaI.<BR>
+<BR>
+Glew library is also included in the Windows' version, but the project is not configured to use. If you need it, you must add glew32s to the list libraries to link and GLEW_BUILD and GLEW_STATIC to the list of macros to define in the compile and 
+link options for the project. If you prefer dynamic linkage, use glew32 instead of glew32s, and do not add GLEW_STATIC. 
+<BR>
+<BR>
+If you are programming on a <B>GNU/Linux</B> system you'll have to install development versions of these libraries by means of your distribution's package manager. If you run Ubuntu or a derivative distro, the command is "sudo apt-get install freeglut3-dev" (note that development versions of libraries' packages usually ends with "-dev" o "-devel").<BR>
+<BR>

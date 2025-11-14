@@ -1,0 +1,15 @@
+<H3>Bibliotecas OpenGL, GLEW and FreeGLUT</H3>
+
+La plantilla OpenGL está configurada para utilizar OpenGL y  <A href="http://freeglut.sourceforge.net/">FreeGLUT</A>.<BR>
+<BR>
+<BR>
+En la configuración para <B>Windows</B> se utiliza <A href="http://freeglut.sourceforge.net/">FreeGLUT</A> y se enlaza estáticamente (no requiere ningún dll). Todos los archivos necesarios (cabeceras y binarios) están incluidos en este complemento en la carpeta "mingwXX-gccY/opengl" dentro de su instalación de ZinjaI.<BR>
+<BR>
+ Para realizar un enlace dinámico hay que cambiar el nombre de la biblioteca a enlazar "freeglut_static" por "freeglut" y quitar la definición de la macro "FREEGLUT_STATIC" (utilice el comando Limpiar del menú Ejecución antes de volver a compilar). En la carpeta "mingwXX-gccY/opengl/bin/" encontrará los archivos dll necesarios para ejecutar el programa cuando se enlaza dinámicamente. Al ejecutar desde ZinjaI, se agrega esta ruta a la variable de entorno "PATH" para evitar la necesidad de copiar dichos archivos a la carpeta del proyecto.<BR>
+<BR>
+La biblioteca <A href="http://glew.sourceforge.net/">GLEW</A> se incluye en su versión para Windows, pero el proyecto no está configurado para utilizarla. Si así lo requiere, debe añadir glew32s a la lista de bibliotecas a enlazar y GLEW_BUILD y GLEW_STATIC a la lista de macros a definir 
+en las opciones de compilación y enlazado del proyecto. Si prefiere enlazado dinámic utilice glew32 en lugar de glew32s, y no agregue GLEW_STATIC.<BR>
+<BR>
+<BR>
+Si utiliza esta plantilla en <B>GNU/Linux</B> deberá instalar las versiones de desarrollo de estas bibliotecas desde su gestor de paquetes. Por ejemplo, en Ubuntu y muchas otras distribuciones derivadas, el comando "sudo apt-get install freeglut3-dev" (notar que los paquetes para desarrollo de las bibliotecas suelen agregar la terminación "-dev" o "-devel").<BR>
+<BR>

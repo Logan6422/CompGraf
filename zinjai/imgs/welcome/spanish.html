@@ -1,0 +1,49 @@
+<HTML><HEAD><TITLE>ZinaI Welcome Page</TITLE></HEAD><BODY bgcolor="${COLOR:DEFAULT_BACK}" text="${COLOR:DEFAULT_FORE}" link="${COLOR:WORD2_FORE}">
+
+<HR><CENTER><TABLE><TR>
+  <TD><FONT size=+1><B>Bienvenido a</B></font></TD>
+  <TD><img src="${IMAGE:TITLE}"></TD>
+  <TD><FONT size=+1><B>${ZVERSION}</B></FONT></TD>
+</TR></TABLE></CENTER><HR>
+
+<table><TR><TD>&nbsp;&nbsp;&nbsp;</td><td>
+
+  <table width="100%"><tr>
+    <td valign="top"><A href="new_simple"><img src="new_file.png"></A><br></td>
+    <td><FONT size=+1><A href="new_simple"><B>Crear un programa simple</B></A></FONT><BR>
+      <FONT color="${COLOR:COMMENT_FORE}">Comenzar a trabajar rápidamente sin tener que crear ni configurar un proyecto. Solo seleccione una plantilla y comience a programar.</font></td>
+  </tr><tr>
+    <TD valign="top"><A href="new_project"><img src="new_project.png"></A><br></td>
+    <TD><FONT size=+1><A href="new_project"><B>Crear un nuevo proyecto</B></A></FONT><BR>
+      <FONT color="${COLOR:COMMENT_FORE}">Para los desarrollos más complejos, un proyecto permite establecer perfiles con opciones de compilación avanzadas, integrar herramientas externas, etc.</font></td>
+  </tr><tr>
+    <TD valign="top"><A href="import_project"><img src="import.png"></A><br></td>
+    <TD><FONT size=+1><A href="import_project"><B>Importar un proyecto</B></A></FONT><BR>
+      <FONT color="${COLOR:COMMENT_FORE}">Utilice esta opción para configurar un nuevo proyecto ZinjaI para un conjunto de fuentes preexistentes.</font></td>
+  </tr><tr>
+    <TD valign="top"><A href="open_file"><img src="open.png"></A></TD>
+    <TD><FONT size=+1><A href="open_file"><B>Abrir un archivo fuente o proyecto existente</B></A></FONT>
+  <UL>
+    <LI><FONT color="${COLOR:COMMENT_FORE}"><B>Últimos archivos utilizados</B></FONT>: (<A href="recent_files">ver más...</A>)<OL><TT>
+      <LI><FONT size=+1><A href="open:${FILE:01}">${FILE:01}</A></FONT></LI>
+      <LI><FONT size=+1><A href="open:${FILE:02}">${FILE:02}</A></FONT></LI>
+      <LI><FONT size=+1><A href="open:${FILE:03}">${FILE:03}</A></FONT></LI>
+    </TT></OL></LI>
+    <LI><FONT color="${COLOR:COMMENT_FORE}"><B>Últimos proyectos utilizados</B></FONT>: (<A href="recent_projects">ver más...</A>)<OL><TT>
+      <LI><FONT size=+1><A href="open:${PROJECT:01}">${PROJECT:01}</A></FONT></LI>
+      <LI><FONT size=+1><A href="open:${PROJECT:02}">${PROJECT:02}</A></FONT></LI>
+      <LI><FONT size=+1><A href="open:${PROJECT:03}">${PROJECT:03}</A></FONT></LI>
+    </TT></OL></LI>
+  </UL></td></tr></table>
+
+</TD></TR></TABLE>
+<HR>
+<TABLE><TR>
+  <TD><A href="tip"><img src="tip.png"></A></TD>
+  <TD><B>&nbsp;¿Sabías que ...?</B><BR><FONT color="${COLOR:COMMENT_FORE}">${TIP}</FONT></TD>
+</TR></TABLE>
+<HR>
+<FONT size=-2>
+Si no quieres volver a ver este panel al inciar haz <A href="never_again">click aqui</A>: en lugar de este panel, ZinjaI iniciará mostrando un programa en blanco utilizando la plantilla por defecto para que comiences a trabajar.
+</FONT>
+</BODY></HTML>

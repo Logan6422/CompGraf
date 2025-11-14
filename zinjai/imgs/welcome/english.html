@@ -1,0 +1,49 @@
+<HTML><HEAD><TITLE>ZinaI Welcome Page</TITLE></HEAD><BODY bgcolor="${COLOR:DEFAULT_BACK}" text="${COLOR:DEFAULT_FORE}" link="${COLOR:WORD2_FORE}">
+
+<HR><CENTER><TABLE><TR>
+  <TD><FONT size=+1><B>Welcome to ZinjaI</B></font></TD>
+  <TD><img src="${IMAGE:TITLE}"></TD>
+  <TD><FONT size=+1><B>${ZVERSION}</B></FONT></TD>
+</TR></TABLE></CENTER><HR>
+
+<table><TR><TD>&nbsp;&nbsp;&nbsp;</td><td>
+
+  <table width="100%"><tr>
+    <td valign="top"><A href="new_simple"><img src="new_file.png"></A><br></td>
+    <td><FONT size=+1><A href="new_simple"><B>Create simple program</B></A></FONT><BR>
+      <FONT color="${COLOR:COMMENT_FORE}">Start working quickly without neither creating projects nor definifing any setting. Just choose a template and start writting your code.</font></td>
+  </tr><tr>
+    <TD valign="top"><A href="new_project"><img src="new_project.png"></A><br></td>
+    <TD><FONT size=+1><A href="new_project"><B>Create new project</B></A></FONT><BR>
+      <FONT color="${COLOR:COMMENT_FORE}">For a more complex program, a project let you handle several source files, custom compiling settings, advance extra options, external tools integration, and more.</font></td>
+  </tr><tr>
+    <TD valign="top"><A href="import_project"><img src="import.png"></A><br></td>
+    <TD><FONT size=+1><A href="import_project"><B>Import an existing project</B></A></FONT><BR>
+      <FONT color="${COLOR:COMMENT_FORE}">Use this option to define a new ZinjaI project for a set of pre-existing sources.</font></td>
+  </tr><tr>
+    <TD valign="top"><A href="open_file"><img src="open.png"></A></TD>
+    <TD><FONT size=+1><A href="open_file"><B>Open and existing file or project</B></A></FONT>
+  <UL>
+    <LI><FONT color="${COLOR:COMMENT_FORE}"><B>Recent files</B></FONT>: (<A href="recent_files">more...</A>)<OL><TT>
+      <LI><FONT size=+1><A href="open:${FILE:01}">${FILE:01}</A></FONT></LI>
+      <LI><FONT size=+1><A href="open:${FILE:02}">${FILE:02}</A></FONT></LI>
+      <LI><FONT size=+1><A href="open:${FILE:03}">${FILE:03}</A></FONT></LI>
+    </TT></OL></LI>
+    <LI><FONT color="${COLOR:COMMENT_FORE}"><B>Recent projects</B></FONT>: (<A href="recent_projects">more...</A>)<OL><TT>
+      <LI><FONT size=+1><A href="open:${PROJECT:01}">${PROJECT:01}</A></FONT></LI>
+      <LI><FONT size=+1><A href="open:${PROJECT:02}">${PROJECT:02}</A></FONT></LI>
+      <LI><FONT size=+1><A href="open:${PROJECT:03}">${PROJECT:03}</A></FONT></LI>
+    </TT></OL></LI>
+  </UL></td></tr></table>
+
+</TD></TR></TABLE>
+<HR>
+<TABLE><TR>
+  <TD><A href="tip"><img src="tip.png"></A></TD>
+  <TD><B>&nbsp;Did you know that ...?</B><BR><FONT color="${COLOR:COMMENT_FORE}">${TIP}</FONT></TD>
+</TR></TABLE>
+<HR>
+<FONT size=-2>
+If you don't want to see this screen again <A href="never_again">click here</A>: next time you'll find a new empty program from your default template instead.
+</FONT>
+</BODY></HTML>

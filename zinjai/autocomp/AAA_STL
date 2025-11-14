@@ -1,0 +1,535 @@
+namespace std
+
+<algorithm>
+
+	template < class BidirIt > BidirIt prev(BidirIt it,difference_type n = 1); 
+	template < class BidirIt > BidirIt next(BidirIt it,difference_type n = 1); 
+	template <class InputIterator, class Function> Function for_each (InputIterator first, InputIterator last, Function f);
+	template <class InputIterator, class T> InputIterator find ( InputIterator first, InputIterator last, const T& value );
+	template <class InputIterator, class Predicate> InputIterator find_if ( InputIterator first, InputIterator last, Predicate pred );
+	template <class ForwardIterator1, class ForwardIterator2> ForwardIterator1 find_end ( ForwardIterator1 first1, ForwardIterator1 last1, ForwardIterator2 first2, ForwardIterator2 last2 );
+	template <class ForwardIterator1, class ForwardIterator2, class BinaryPredicate> ForwardIterator1 find_end ( ForwardIterator1 first1, ForwardIterator1 last1, ForwardIterator2 first2, ForwardIterator2 last2.BinaryPredicate pred );
+	template <class ForwardIterator1, class ForwardIterator2> ForwardIterator1 find_first_of ( ForwardIterator1 first1, ForwardIterator1 last1, ForwardIterator2 first2, ForwardIterator2 last2 );
+	template <class ForwardIterator1, class ForwardIterator2, class BinaryPredicate> ForwardIterator1 find_first_of ( ForwardIterator1 first1, ForwardIterator1 last1, ForwardIterator2 first2, ForwardIterator2 last2, BinaryPredicate pred );
+	template <class ForwardIterator> ForwardIterator adjacent_find ( ForwardIterator first, ForwardIterator last );
+	template <class ForwardIterator, class BinaryPredicate> ForwardIterator adjacent_find ( ForwardIterator first, ForwardIterator last, BynaryPredicate pred );
+	template <class InputIterator, class T> typename iterator_traits<InputIterator>::difference_type count ( ForwardIterator first, ForwardIterator last, const T& value );
+	template <class InputIterator, class Predicate> typename iterator_traits<InputIterator>::difference_type count_if ( ForwardIterator first, ForwardIterator last, Predicate pred );
+	template <class InputIterator1, class InputIterator2> pair<InputIterator1, InputIterator2> mismatch (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2 );
+	template <class InputIterator1, class InputIterator2, class BinaryPredicate> pair<InputIterator1, InputIterator2> mismatch (InputIterator1 first1, InputIterator1 last1,InputIterator2 first2, BinaryPredicate pred );
+	template <class InputIterator1, class InputIterator2> bool equal ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2 );
+	template <class InputIterator1, class InputIterator2, class BinaryPredicate> bool equal ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, BinaryPredicate pred );
+	template <class ForwardIterator1, class ForwardIterator2> ForwardIterator1 search ( ForwardIterator1 first1, ForwardIterator1 last1, ForwardIterator2 first2, ForwardIterator2 last2 );
+	template <class ForwardIterator1, class ForwardIterator2, class BinaryPredicate> ForwardIterator1 search ( ForwardIterator1 first1, ForwardIterator1 last1, ForwardIterator2 first2, ForwardIterator2 last2.BinaryPredicate pred );
+	template <class ForwardIterator, class Size, class T> ForwardIterator search_n ( ForwardIterator first, ForwardIterator last, Size count, const T& value );
+	template <class ForwardIterator, class Size, class T, class BinaryPredicate> ForwardIterator search_n ( ForwardIterator first, ForwardIterator last, Size count, const T& value. BinaryPredicate pred );
+	template <class InputIterator, class OutputIterator> OutputIterator copy ( InputIterator first, InputIterator last, OutputIterator result );
+	template <class BidirectionalIterator1, class BidirectionalIterator2> BidirectionalIterator2 copy_backward ( BidirectionalIterator1 first, BidirectionalIterator1 last, BidirectionalIterator2 result );
+	template <class T> void swap ( T& a, T& b );
+	template < class ForwardIterator1, class ForwardIterator2 > ForwardIterator2 swap_ranges ( ForwardIterator1 first1, ForwardIterator1 last1, ForwardIterator2 first2 );
+	template <class ForwardIterator1, class ForwardIterator2> void iter_swap ( ForwardIterator1 a, ForwardIterator2 b );
+	template < class InputIterator, class OutputIterator, class UnaryOperator > OutputIterator transform ( InputIterator first1, InputIterator last1, OutputIterator result, UnaryOperator op );
+	template < class InputIterator1, class InputIterator2, class OutputIterator, class BinaryOperator > OutputIterator transform ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, OutputIterator result, BinaryOperator binary_op );
+	template < class ForwardIterator, class T > void replace ( ForwardIterator first, ForwardIterator last, const T& old_value, const T& new_value );
+	template < class ForwardIterator, class Predicate, class T > void replace_if ( ForwardIterator first, ForwardIterator last, Predicate pred, const T& new_value );
+	template < class InputIterator, class OutputIterator, class T > OutputIterator replace_copy ( InputIterator first, InputIterator last, OutputIterator result, const T& old_value, const T& new_value );
+	template < class InputIterator, class OutputIterator, class Predicate, class T > OutputIterator replace_copy_if ( InputIterator first, InputIterator last, OutputIterator result, Predicate pred, const T& new_value );
+	template < class ForwardIterator, class T > void fill ( ForwardIterator first, ForwardIterator last, const T& value );
+	template < class OutputIterator, class Size, class T > void fill_n ( OutputIterator first, Size n, const T& value );
+	template <class ForwardIterator, class Generator> void generate ( ForwardIterator first, ForwardIterator last, Generator gen );
+	template <class OutputIterator, class Size, class Generator> void generate ( OutputIterator first, Size n, Generator gen );
+	template < class ForwardIterator, class T > ForwardIterator remove ( ForwardIterator first, ForwardIterator last, const T& value );
+	template < class ForwardIterator, class Predicate > ForwardIterator remove_if ( ForwardIterator first, ForwardIterator last, Predicate pred );
+	template <class InputIterator, class OutputIterator, class T> OutputIterator remove_copy ( InputIterator first, InputIterator last, OutputIterator result, const T& value );
+	template <class InputIterator, class OutputIterator, class Predicate> OutputIterator remove_copy_if ( InputIterator first, InputIterator last, OutputIterator result, Predicate pred );
+	template <class ForwardIterator> ForwardIterator unique ( ForwardIterator first, ForwardIterator last );
+	template <class ForwardIterator, class BinaryPredicate> ForwardIterator unique ( ForwardIterator first, ForwardIterator last, BinaryPredicate pred );
+	template <class InputIterator, class OutputIterator> OutputIterator unique_copy ( InputIterator first, InputIterator last, OutputIterator result );
+	template <class InputIterator, class OutputIterator, class BinaryPredicate> OutputIterator unique_copy ( InputIterator first, InputIterator last, OutputIterator result, BinaryPredicate pred );
+	template <class BidirectionalIterator> void reverse ( BidirectionalIterator first, BidirectionalIterator last);
+	template <class BidirectionalIterator, class OutputIterator> OutputIterator reverse_copy ( BidirectionalIterator first, BidirectionalIterator last, OutputIterator result );
+	template <class ForwardIterator> void rotate ( ForwardIterator first, ForwardIterator middle, ForwardIterator last );
+	template <class ForwardIterator, class OutputIterator> OutputIterator rotate_copy ( ForwardIterator first, ForwardIterator middle, ForwardIterator last, OutputIterator result );
+	template <class RandomAccessIterator> void random_shuffle ( RandomAccessIterator first, RandomAccessIterator last );
+	template <class RandomAccessIterator, class RandomNumberGenerator> void random_shuffle ( RandomAccessIterator first, RandomAccessIterator last, RandomNumberGenerator& rand );
+	template <class BidirectionalIterator, class Predicate> BidirectionalIterator partition ( BidirectionalIterator first, BidirectionalIterator last, Predicate pred );
+	template <class BidirectionalIterator, class Predicate> BidirectionalIterator stable_partition ( BidirectionalIterator first, BidirectionalIterator last, Predicate pred );
+	template <class RandomAccessIterator> void sort ( RandomAccessIterator first, RandomAccessIterator last );
+	template <class RandomAccessIterator, class Compare> void sort ( RandomAccessIterator first, RandomAccessIterator last, Compare comp );
+	template <class RandomAccessIterator> void stable_sort ( RandomAccessIterator first, RandomAccessIterator last );
+	template <class RandomAccessIterator, class Compare> void stable_sort ( RandomAccessIterator first, RandomAccessIterator last, Compare comp );
+	template <class RandomAccessIterator> void partial_sort ( RandomAccessIterator first, RandomAccessIterator middle, RandomAccessIterator last );
+	template <class RandomAccessIterator, class Compare> void partial_sort ( RandomAccessIterator first, RandomAccessIterator middle, RandomAccessIterator last, Compare comp );
+	template <class InputIterator, class RandomAccessIterator> RandomAccessIterator partial_sort_copy ( InputIterator first,InputIterator last, RandomAccessIterator result_first, RandomAccessIterator result_last );
+	template <class InputIterator, class RandomAccessIterator, class Compare> RandomAccessIterator partial_sort_copy ( InputIterator first,InputIterator last, RandomAccessIterator result_first, RandomAccessIterator result_last, Compare comp );
+	template <class RandomAccessIterator> void nth_element ( RandomAccessIterator first, RandomAccessIterator nth, RandomAccessIterator last );
+	template <class RandomAccessIterator, class Comapre> void nth_element ( RandomAccessIterator first, RandomAccessIterator nth, RandomAccessIterator last, Compare comp );
+	template <class ForwardIterator, class T> ForwardIterator lower_bound ( ForwardIterator first, ForwardIterator last, const T& value );
+	template <class ForwardIterator, class T, class Compare> ForwardIterator lower_bound ( ForwardIterator first, ForwardIterator last, const T& value, Compare comp );
+	template <class ForwardIterator, class T> ForwardIterator upper_bound ( ForwardIterator first, ForwardIterator last, const T& value );
+	template <class ForwardIterator, class T, class Compare> ForwardIterator upper_bound ( ForwardIterator first, ForwardIterator last, const T& value, Compare comp );
+	template <class ForwardIterator, class T> pair<ForwardIterator,ForwardIterator> equal_range ( ForwardIterator first, ForwardIterator last, const T& value );
+	template <class ForwardIterator, class T, class Compare> pair<ForwardIterator,ForwardIterator> equal_range ( ForwardIterator first, ForwardIterator last, const T& value, Compare comp );
+	template <class ForwardIterator, class T> bool binary_search ( ForwardIterator first, ForwardIterator last, const T& value );
+	template <class ForwardIterator, class T, class Compare> bool binary_search ( ForwardIterator first, ForwardIterator last, const T& value, Compare comp );
+	template <class InputIterator1, class InputIterator2, class OutputIterator> OutputIterator merge ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result );
+	template <class InputIterator1, class InputIterator2, class OutputIterator, class Compare> OutputIterator merge ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result, Compare comp );
+	template <class BidirectionalIterator> void inplace_merge ( BidirectionalIterator first, BidirectionalIterator middle, BidirectionalIterator last );
+	template <class BidirectionalIterator, class Compare> void inplace_merge ( BidirectionalIterator first, BidirectionalIterator middle, BidirectionalIterator last, Compare comp );
+	template <class InputIterator1, class InputIterator2> bool includes ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2 );
+	template <class InputIterator1, class InputIterator2, class Compare> bool includes ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, Compare comp );
+	template <class InputIterator1, class InputIterator2, class OutputIterator> OutputIterator set_union ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result );
+	template <class InputIterator1, class InputIterator2, class OutputIterator, class Compare> OutputIterator set_union ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result, Compare comp );
+	template <class InputIterator1, class InputIterator2, class OutputIterator> OutputIterator set_intersection ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result );
+	template <class InputIterator1, class InputIterator2, class OutputIterator, class Compare> OutputIterator set_intersection ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result, Compare comp );
+	template <class InputIterator1, class InputIterator2, class OutputIterator> OutputIterator set_difference ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result );
+	template <class InputIterator1, class InputIterator2, class OutputIterator, class Compare> OutputIterator set_difference ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result, Compare comp );
+	template <class InputIterator1, class InputIterator2, class OutputIterator> OutputIterator set_symmetric_difference ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result );
+	template <class InputIterator1, class InputIterator2, class OutputIterator, class Compare> OutputIterator set_symmetric_difference ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result, Compare comp );
+	template <class RandomAccessIterator> void push_heap ( RandomAccessIterator first, RandomAccessIterator last );
+	template <class RandomAccessIterator, class Compare> void push_heap ( RandomAccessIterator first, RandomAccessIterator last, Compare comp );
+	template <class RandomAccessIterator> void pop_heap ( RandomAccessIterator first, RandomAccessIterator last );
+	template <class RandomAccessIterator, class Compare> void pop_heap ( RandomAccessIterator first, RandomAccessIterator last, Compare comp );
+	template <class RandomAccessIterator> void make_heap ( RandomAccessIterator first, RandomAccessIterator last );
+	template <class RandomAccessIterator, class Compare> void make_heap ( RandomAccessIterator first, RandomAccessIterator last, Compare comp );
+	template <class RandomAccessIterator> void sort_heap ( RandomAccessIterator first, RandomAccessIterator last );
+	template <class RandomAccessIterator, class Compare> void sort_heap ( RandomAccessIterator first, RandomAccessIterator last, Compare comp );
+	template <class T> const T& min ( const T& a, const T& b );
+	template <class T, class Compare> const T& min ( const T& a, const T& b, Compare comp );
+	template <class T> const T& max ( const T& a, const T& b );
+	template <class T, class Compare> const T& max ( const T& a, const T& b, Compare comp );
+	template <class ForwardIterator> ForwardIterator min_element ( ForwardIterator first, ForwardIterator last );
+	template <class ForwardIterator, class Compare> ForwardIterator min_element ( ForwardIterator first, ForwardIterator last, Compare comp );
+	template <class ForwardIterator> ForwardIterator max_element ( ForwardIterator first, ForwardIterator last );
+	template <class ForwardIterator, class Compare> ForwardIterator max_element ( ForwardIterator first, ForwardIterator last, Compare comp );
+	template <class InputIterator1, class InputIterator2> bool lexicographical_compare ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2 );
+	template <class InputIterator1, class InputIterator2, class Compare> bool lexicographical_compare ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, Compare comp );
+	template <class BidirectionalIterator> bool next_permutation (BidirectionalIterator first, BidirectionalIterator last );
+	template <class BidirectionalIterator, class Compare> bool next_permutation (BidirectionalIterator first, BidirectionalIterator last, Compare comp);
+	template <class BidirectionalIterator> bool prev_permutation (BidirectionalIterator first, BidirectionalIterator last );
+	template <class BidirectionalIterator, class Compare> bool prev_permutation (BidirectionalIterator first, BidirectionalIterator last, Compare comp);
+
+
+<numeric>
+	template <class InputIterator, class T>, T accumulate ( InputIterator first, InputIterator last, T init );
+	template <class InputIterator, class T, class BinaryOperation>, T accumulate ( InputIterator first, InputIterator last, T init, BinaryOperation binary_op );
+	template <class InputIterator, class OutputIterator> OutputIterator adjacent_difference ( InputIterator first, InputIterator last, OutputIterator result );
+	template <class InputIterator, class OutputIterator, class BinaryOperation> OutputIterator adjacent_difference ( InputIterator first, InputIterator last, OutputIterator result, BinaryOperation binary_op );
+	template <class InputIterator1, class InputIterator2, class T> T inner_product ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, T init );
+	template <class InputIterator1, class InputIterator2, class T, class BinaryOperation1, class BinaryOperation2> T inner_product ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, T init, BinaryOperation1 binary_op1, BinaryOperation2 binary_op2 );
+	template <class InputIterator, class OutputIterator> OutputIterator partial_sum ( InputIterator first, InputIterator last, OutputIterator result );
+	template <class InputIterator, class OutputIterator, class BinaryOperation> OutputIterator partial_sum ( InputIterator first, InputIterator last, OutputIterator result, BinaryOperation binary_op );
+
+<vector>
+	class vector
+		size_type size ( ) const;
+		template <class InputIterator> void assign ( InputIterator first, InputIterator last );
+		void assign ( size_type n, const T& u );
+		const_reference at ( size_type n ) const;
+		reference at ( size_type n );
+		reference back ( );
+		const_reference back ( ) const;
+		iterator begin ( );
+		const_iterator begin ( ) const;
+		size_type capacity ( ) const;
+		void clear ( );
+		bool empty ( ) const;
+		iterator end ( );
+		const_iterator end ( ) const;
+		iterator erase ( iterator position );
+		iterator erase ( iterator first, iterator last );
+		reference front ( );
+		const_reference front ( ) const;
+		allocator_type get_allocator ( ) const;
+		iterator insert ( iterator position, const T& x );
+		void insert ( iterator position, size_type n, const T& x );
+		template <class InputIterator> void insert ( iterator position, InputIterator first, InputIterator last );
+		size_type max_size ( ) const;
+		vector<T,Allocator>& operator= (const vector<T,Allocator>& x);
+		reference operator[] ( size_type n );
+		const_reference operator[] ( size_type n ) const;
+		void pop_back ( );
+		void push_back ( const T& x );
+		reverse_iterator rbegin ( );
+		const_reverse_iterator rbegin ( ) const;
+		reverse_iterator rend ( );
+		const_reverse_iterator rend ( ) const;
+		void reserve ( size_type n );
+		void resize ( size_type sz, T c = T() );
+		void swap ( vector<T,Allocator>& vec );
+		explicit vector ( const Allocator& = Allocator() );
+		explicit vector ( size_type n, const T& value= T(), const Allocator& = Allocator() );
+		template <class InputIterator> vector ( InputIterator first, InputIterator last, const Allocator& = Allocator() );
+		vector ( const vector<T,Allocator>& x );
+	
+<list>
+	class list
+		template <class InputIterator> void assign ( InputIterator first, InputIterator last );
+		void assign ( size_type n, const T& u );
+		reference back ( );
+		const_reference back ( ) const;
+		iterator begin ( );
+		const_iterator begin ( ) const;
+		void clear ( );
+		bool empty ( ) const;
+		iterator end ( );
+		const_iterator end ( ) const;
+		iterator erase ( iterator position );
+		iterator erase ( iterator first, iterator last );
+		reference front ( );
+		const_reference front ( ) const;
+		allocator_type get_allocator ( ) const;
+		iterator insert ( iterator position, const T& x );
+		void insert ( iterator position, size_type n, const T& x );
+		template <class InputIterator> void insert ( iterator position, InputIterator first, InputIterator last );
+		explicit list ( const Allocator& = Allocator ( ) );
+		explicit list ( size_type n, const T& value = T(), const Allocator& = Allocator() );
+		template < class InputIterator > list ( InputIterator first, InputIterator last, const Allocator& = Allocator() );
+		list ( const list<T,Allocator>& x );
+		size_type max_size ( ) const;
+		void merge ( list<T,Allocator>& x );
+		template <class Compare> void merge ( list<T,Allocator>& x, Compare comp );
+		list<T,Allocator>& operator= ( const list<T,Allocator>& x );
+		void pop_back ( );
+		void pop_front ( );
+		void push_back ( const T& x );
+		void push_front ( const T& x );
+		reverse_iterator rbegin ( );
+		const_reverse_iterator rbegin ( ) const;
+		void remove ( const T& value );
+		template <class Predicate> void remove_if ( Predicate pred );
+		reverse_iterator rend ( );
+		const_reverse_iterator rend ( ) const;
+		void resize ( size_type sz, T c = T() );
+		void reverse ( );
+		size_type size ( ) const;
+		void sort ( );
+		template <class Compare> void sort ( Compare comp );
+		void splice ( iterator position, list<T,Allocator>& x );
+		void splice ( iterator position, list<T,Allocator>& x, iterator i );
+		void splice ( iterator position, list<T,Allocator>& x, iterator first, iterator last );
+		void swap ( list<T,Allocator>& lst );
+		void unique ( );
+		template <class BinaryPredicate> void unique ( BinaryPredicate binary_pred );
+
+
+	
+<map>
+	class map
+		iterator begin ();
+		const_iterator begin () const;
+		void clear ( );
+		size_type count ( cont key_type& x ) const;
+		bool empty ( ) const;
+		iterator end ();
+		const_iterator end () const;
+		pair<iterator,iterator>	equal_range ( const key_type& x );
+		pair<const_iterator,const_iterator>	equal_range ( const key_type& x ) const;
+		void erase ( iterator position );
+		size_type erase ( const key_type& x );
+		void erase ( iterator first, iterator last );
+		iterator find ( const key_type& x );
+		const_iterator find ( const key_type& x ) const;
+		allocator_type get_allocator() const;
+		pair<iterator,bool> insert ( const value_type& x );
+		iterator insert ( iterator position, const value_type& x );
+		template <class InputIterator> void insert ( InputIterator first, InputIterator last );
+		key_compare key_comp ( ) const;
+		iterator lower_bound ( const key_type& x );
+		const_iterator lower_bound ( const key_type& x ) const;
+		explicit map ( const Compare& comp = Compare(), const Allocator& = Allocator() );
+		template <class InputIterator> map ( InputIterator first, InputIterator last, const Compare& comp = Compare(), const Allocator& = Allocator() );
+		map ( const map<Key,T,Compare,Allocator>& x );
+		size_type max_size () const;
+		map<Key,T,Compare,Allocator>& operator= ( const map<Key,T,Compare,Allocator>& x );
+		T& operator[] ( const key_type& x );
+		reverse_iterator rbegin();
+		const_reverse_iterator rbegin() const;
+		reverse_iterator rend();
+		const_reverse_iterator rend() const;
+		size_type size() const;
+		void swap ( map<Key,T,Compare,Allocator>& mp );
+		iterator upper_bound ( const key_type& x );
+		const_iterator upper_bound ( const key_type& x ) const;
+		value_compare value_comp ( ) const;
+
+	class multimap
+		iterator begin ( );
+		const_iterator begin ( ) const;
+		void clear ( );
+		size_type count ( cont key_type& x ) const;
+		bool empty ( ) const;
+		iterator end ( );
+		const_iterator end ( ) const;
+		pair<iterator,iterator> equal_range ( const key_type& x );
+		pair<const_iterator,const_iterator> equal_range ( const key_type& x ) const;
+		void erase ( iterator position );
+		size_type erase ( const key_type& x );
+		void erase ( iterator first, iterator last );
+		iterator find ( const key_type& x );
+		const_iterator find ( const key_type& x ) const;
+		allocator_type get_allocator() const;
+		iterator insert ( const value_type& x );
+		iterator insert ( iterator position, const value_type& x );
+		template <class InputIterator> void insert ( InputIterator first, InputIterator last );
+		key_compare key_comp ( ) const;
+		iterator lower_bound ( const key_type& x );
+		const_iterator lower_bound ( const key_type& x ) const;
+		size_type max_size ( ) const;
+		multimap<Key,T,Compare,Allocator>& operator= ( const multimap<Key,T,Compare,Allocator>& x );
+		reverse_iterator rbegin ( );
+		const_reverse_iterator rbegin ( ) const;
+		reverse_iterator rend ( );
+		const_reverse_iterator rend ( ) const;
+		size_type size ( ) const;
+		void swap ( map<Key,T,Compare,Allocator>& mmp );
+		iterator upper_bound ( const key_type& x );
+		const_iterator upper_bound ( const key_type& x ) const;
+		value_compare value_comp ( ) const;
+
+
+<set>
+	class set
+		iterator begin ();
+		const_iterator begin () const;
+		void clear ( );
+		size_type count ( cont key_type& x ) const;
+		bool empty ( ) const;
+		iterator end ();
+		const_iterator end () const;
+		pair<iterator,iterator> equal_range ( const key_type& x ) const;
+		void erase ( iterator position );
+		size_type erase ( const key_type& x );
+		void erase ( iterator first, iterator last );
+		iterator find ( const key_type& x ) const;
+		allocator_type get_allocator() const;
+		pair<iterator,bool> insert ( const value_type& x );
+		iterator insert ( iterator position, const value_type& x );
+		template <class InputIterator> void insert ( InputIterator first, InputIterator last );
+		key_compare key_comp ( ) const;
+		iterator lower_bound ( const key_type& x ) const;
+		size_type max_size () const;
+		set<Key,Compare,Allocator>&	operator= ( const set<Key,Compare,Allocator>& x );
+		reverse_iterator rbegin();
+		const_reverse_iterator rbegin() const;
+		reverse_iterator rend();
+		const_reverse_iterator rend() const;
+		explicit set ( const Compare& comp = Compare(), const Allocator& = Allocator() );
+		template <class InputIterator> set ( InputIterator first, InputIterator last, const Compare& comp = Compare(), const Allocator& = Allocator() );
+		set ( const set<Key,Compare,Allocator>& x );
+		size_type size() const;
+		void swap ( set<Key,Compare,Allocator>& st );
+		iterator upper_bound ( const key_type& x ) const;
+		value_compare value_comp ( ) const;
+
+	class multiset
+		iterator begin ();
+		const_iterator begin () const;
+		void clear ( );
+		size_type count ( cont key_type& x ) const;
+		bool empty ( ) const;
+		iterator end ();
+		const_iterator end () const;
+		pair<iterator,iterator> equal_range ( const key_type& x ) const;
+		void erase ( iterator position );
+		size_type erase ( const key_type& x );
+		void erase ( iterator first, iterator last );
+		iterator find ( const key_type& x ) const;
+		allocator_type get_allocator() const;
+		iterator insert ( const value_type& x );
+		iterator insert ( iterator position, const value_type& x );
+		template <class InputIterator> void insert ( InputIterator first, InputIterator last );
+		key_compare key_comp ( ) const;
+		iterator lower_bound ( const key_type& x ) const;
+		size_type max_size () const;
+		explicit multiset ( const Compare& comp = Compare(), const Allocator& = Allocator() );
+		template <class InputIterator> multiset ( InputIterator first, InputIterator last, const Compare& comp = Compare(), const Allocator& = Allocator() );
+		multiset ( const multiset<Key,Compare,Allocator>& x );
+		multiset<Key,Compare,Allocator>& operator= ( const multiset<Key,Compare,Allocator>& x );
+		reverse_iterator rbegin();
+		const_reverse_iterator rbegin() const;
+		reverse_iterator rend();
+		const_reverse_iterator rend() const;
+		size_type size() const;
+		void swap ( multiset<Key,Compare,Allocator>& mst );
+		iterator upper_bound ( const key_type& x ) const;
+		value_compare value_comp ( ) const;
+
+	
+<queue>
+	class queue
+		value_type& back ( );
+		const value_type& back ( ) const;
+		bool empty ( ) const;
+		value_type& front ( );
+		const value_type& front ( ) const;
+		void pop ( );
+		void push ( const T& x );
+		explicit queue ( const Container& ctnr = Container() );
+		size_type size ( ) const;
+		
+	class priority_queue
+		bool empty ( ) const;
+		void pop ( );
+		explicit priority_queue ( const Compare& x = Compare(), const Container& y = Container() );
+		template <class InputIterator> priority_queue ( InputIterator first, InputIterator last, const Compare& x = Compare(), const Container& y = Container() );
+		void push ( const T& x );
+		size_type size ( ) const;
+		const value_type& top ( ) const;
+	
+<deque>
+	class deque
+		template <class InputIterator> void assign ( InputIterator first, InputIterator last );
+		void assign ( size_type n, const T& u );
+		const_reference at ( size_type n ) const;
+		reference at ( size_type n );
+		reference back ( );
+		const_reference back ( ) const;
+		iterator begin ( );
+		const_iterator begin ( ) const;
+		void clear ( );explicit deque ( const Allocator& = Allocator() );
+		explicit deque ( size_type n, const T& value= T(), const Allocator& = Allocator() );
+		template <class InputIterator> deque ( InputIterator first, InputIterator last, const Allocator& = Allocator() );
+		deque ( const deque<T,Allocator>& x );
+		bool empty ( ) const;
+		iterator end ( );
+		const_iterator end ( ) const;
+		iterator erase ( iterator position );
+		iterator erase ( iterator first, iterator last );
+		reference front ( );
+		const_reference front ( ) const;
+		allocator_type get_allocator ( ) const;
+		iterator insert ( iterator position, const T& x );
+		void insert ( iterator position, size_type n, const T& x );
+		template <class InputIterator> void insert ( iterator position, InputIterator first, InputIterator last );
+		size_type max_size ( ) const;
+		deque<T,Allocator>& operator= ( const deque<T,Allocator>& x );
+		reference operator[] ( size_type n );
+		const_reference operator[] ( size_type n ) const;
+		void pop_back ( );
+		void pop_front ( );
+		void push_back ( const T& x );
+		void push_front ( const T& x );
+		reverse_iterator rbegin ( );
+		const_reverse_iterator rbegin ( ) const;
+		reverse_iterator rend ( );
+		const_reverse_iterator rend ( ) const;
+		void resize ( size_type sz, T c = T() );
+		size_type size ( ) const;
+		void swap ( list<T,Allocator>& dqe );
+
+<stack>
+	class stack
+		bool empty ( ) const;
+		void pop ( );
+		void push ( const T& x );
+		size_type size ( ) const;
+		explicit stack ( const Container& ctnr = Container() );
+		value_type& top ( );
+		const value_type& top ( ) const;
+
+<bitset>
+	class bitset
+		bool any ( ) const;
+		bitset ( );
+		bitset ( unsigned long val );
+		template<class charT, class traits, class Allocator> explicit bitset ( const basic_string<charT,traits,Allocator>& str, typename basic_string<charT,traits,Allocator>::size_type pos = 0, typename basic_string<charT,traits,Allocator>::size_type n = basic_string<charT,traits,Allocator>::npos);
+		size_t count ( );
+		bitset<N>& flip ( );
+		bitset<N>& flip ( size_t pos );
+		bool none ( ) const;
+		bool operator[] ( size_t pos ) const;
+		reference operator[] ( size_t pos );
+		bitset<N>& operator&= (const bitset<N>& rhs);
+		bitset<N>& operator|= (const bitset<N>& rhs);
+		bitset<N>& operator^= (const bitset<N>& rhs);
+		bitset<N>& operator<<= (const bitset<N>& rhs);
+		bitset<N>& operator>>= (const bitset<N>& rhs);
+		bitset<N> operator~() const;
+		bitset<N> operator<<(size_t pos) const;
+		bitset<N> operator>>(size_t pos) const;
+		bool operator== (const bitset<N>& rhs) const;
+		bool operator!= (const bitset<N>& rhs) const;
+		bitset<N>& reset ( );
+		bitset<N>& reset ( size_t pos );
+		bitset<N>& set ( );
+		bitset<N>& set ( size_t pos, bool val = true );
+		bool test ( size_t pos ) const;
+		template <class charT, class traits, class Allocator> basic_string<charT,traits,Allocator> to_string() const;
+		unsigned long to_ulong ( ) const;
+<iterator>
+	class iterator
+	class iterator_traits
+	
+	template <class InputIterator, class Distance> void advance (InputIterator& i, Distance n);
+
+	template<class InputIterator> typename iterator_traits<InputIterator>::difference_type distance (InputIterator first, InputIterator last);
+	
+	template <class Container> back_insert_iterator<Container> back_inserter (Container& x);
+	
+	template <class Container> front_insert_iterator<Container> front_inserter (Container& x);
+	
+	template <class Container, class Inserter> insert_iterator<Container> inserter (Container& x, Inserter i);
+	
+	template <class Iterator> class reverse_iterator;
+	
+	class back_insert_iterator public iterator
+		explicit back_insert_iterator (Container& x);
+		back_insert_iterator<Container>& operator= (typename Container::const_reference value);
+		back_insert_iterator<Container>& operator* ();
+		back_insert_iterator<Container>& operator++ ();
+		back_insert_iterator<Container> operator++ (int);
+		
+	class front_insert_iterator public iterator
+		explicit front_insert_iterator (Container& x);
+		front_insert_iterator<Container>& operator= (typename Container::const_reference value);
+		front_insert_iterator<Container>& operator* ();
+		front_insert_iterator<Container>& operator++ ();
+		front_insert_iterator<Container> operator++ (int);
+	
+		
+	class insert_iterator : public iterator
+		explicit insert_iterator (Container& x, typename Container::iterator i);
+		insert_iterator<Container>& operator= (typename Container::const_reference value);
+		insert_iterator<Container>& operator* ();
+		insert_iterator<Container>& operator++ ();
+		insert_iterator<Container> operator++ (int);
+
+	class istream_iterator public iterator
+		istream_iterator() : in_stream(0);
+		istream_iterator(istream_type& s) : in_stream(&s);
+		istream_iterator(const istream_iterator<T,charT,traits,Distance>& x);
+		const T& operator*() const;
+		const T* operator->() const;
+		istream_iterator<T,charT,traits,Distance>& operator++();
+		istream_iterator<T,charT,traits,Distance> operator++(int);
+
+	class ostream_iterator public iterator
+		ostream_iterator(ostream_type& s);
+		ostream_iterator(ostream_type& s, const charT* delimiter);
+		ostream_iterator(const ostream_iterator<T,charT,traits>& x);
+		ostream_iterator<T,charT,traits>& operator= (const T& value);
+		ostream_iterator<T,charT,traits>& operator*();
+		ostream_iterator<T,charT,traits>& operator++();
+		ostream_iterator<T,charT,traits>& operator++(int);
+		
+	class istreambuf_iterator public iterator
+		istreambuf_iterator();
+		istreambuf_iterator(istream_type& s);
+		istreambuf_iterator(streambuf_type* s);
+		istreambuf_iterator(const proxy& p);
+		charT operator*() const;
+		istreambuf_iterator<charT,traits>& operator++();
+		proxy operator++(int);
+		bool equal (istreambuf_iterator& b) const;
+	
+	class ostreambuf_iterator public iterator
+		ostreambuf_iterator(ostream_type& s);
+		ostreambuf_iterator(streambuf_type* s);
+		ostreambuf_iterator& operator= (charT c);
+		ostreambuf_iterator& operator*();
+		ostreambuf_iterator& operator++();
+		ostreambuf_iterator& operator++(int);
+		
+		bool failed() const;
+		
